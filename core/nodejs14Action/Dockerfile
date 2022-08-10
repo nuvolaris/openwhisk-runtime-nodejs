@@ -21,23 +21,23 @@ FROM node:14.19-stretch
 #
 RUN apt-get update && apt-get install -y \
     imagemagick \
+    zip \
     graphicsmagick \
     unzip \
     && rm -rf /var/lib/apt/lists/*
 
-# Add sources and copy the package.json to root container,
-# so npm packages from user functions take precedence.
-#
-WORKDIR /nodejsAction
-ADD  . /nodejsAction/
-COPY package.json /
-
 # Customize runtime with additional packages.
 # Install package globally so user packages can override.
 #
+COPY package.json /
 RUN cd / && npm install --no-package-lock --production \
     && npm cache clean --force
 
+WORKDIR /nodejsAction
+ADD  . /nodejsAction/
+
+RUN chown -R node:node /nodejsAction
+USER node
 EXPOSE 8080
 
 CMD node --expose-gc app.js
