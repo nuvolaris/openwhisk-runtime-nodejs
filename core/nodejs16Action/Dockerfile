@@ -39,7 +39,7 @@ RUN cd / && npm install --no-package-lock --production \
 WORKDIR /nodejsAction
 ADD  . /nodejsAction/
 
-RUN chown -R node:node /nodejsAction
+RUN chown -R node:node /nodejsAction ; chmod 0777 /nodejsAction
 USER node
 EXPOSE 8080
 
