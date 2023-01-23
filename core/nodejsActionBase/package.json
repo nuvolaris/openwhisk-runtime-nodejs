@@ -23,6 +23,7 @@
     "openwhisk": "3.21.6",
     "redis": "4.0.4",
     "serialize-error": "9.1.0",
-    "uuid": "8.3.2"
+    "uuid": "8.3.2",
+    "minio":"7.0.32"
   }
 }
