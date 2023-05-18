@@ -36,6 +36,17 @@ distDocker.dependsOn 'copyKnative'
 distDocker.dependsOn 'copyBuildTemplate'
 distDocker.finalizedBy('cleanup')
 
+task prepare {
+    dependsOn 'copyPackageJson'
+    dependsOn 'copyProxy'
+    dependsOn 'copyRunner'
+    dependsOn 'copyService'
+    dependsOn 'copyPlatform'
+    dependsOn 'copyOpenWhisk'
+    dependsOn 'copyKnative'
+    dependsOn 'copyBuildTemplate'
+}
+
 task copyPackageJson(type: Copy) {
     from '../nodejsActionBase/package.json'
     into '.'
