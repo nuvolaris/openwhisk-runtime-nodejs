@@ -40,5 +40,8 @@ RUN cd / && npm install --no-package-lock --production \
     && npm cache clean --force
 
 EXPOSE 8080
-
-CMD node --expose-gc app.js
+RUN mkdir /.npm ;\ 
+    chown node:root /.npm /nodejsAction ;\ 
+    chmod 0775 /nodejsAction /.npm
+USER node
+CMD [ "bash", "-c", "umask 0 ; node --expose-gc app.js"]
