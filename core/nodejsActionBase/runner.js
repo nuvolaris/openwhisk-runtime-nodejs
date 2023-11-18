@@ -62,9 +62,20 @@ function initializeActionHandler(message) {
                 }
 
                 //  The module to require.
-                let whatToRequire = index !== undefined ? path.join(moduleDir, index) : moduleDir;
-                let handler = eval('require("' + whatToRequire + '").' + main);
-                return assertMainIsFunction(handler, message.main);
+                let whatToRequire = index !== undefined ? path.join(moduleDir, index) : path.join(moduleDir, 'index.js');
+                console.log(whatToRequire)
+                handler = import(whatToRequire).then(module => {
+                    console.log(module)
+                    modfunc = assertMainIsFunction(module.main, message.main);
+                    return Promise.resolve(modfunc);
+                })
+                .catch(error => console.log(error));
+                
+                if(handler) {
+                    return Promise.resolve(handler);
+                } else {
+                    return Promise.rejet("could not resolve function handler");
+                }                
             })
             .catch(error => Promise.reject(error));
     } else try {
@@ -204,8 +215,10 @@ function splitMainHandler(handler) {
 
 function assertMainIsFunction(handler, name) {
     if (typeof handler === 'function') {
+        console.log('hanlder is a function')
         return Promise.resolve(handler);
     } else {
+        console.log("Action entrypoint '" + name + "' is not a function.")
         return Promise.reject("Action entrypoint '" + name + "' is not a function.");
     }
 }

@@ -66,3 +66,4 @@ ansible/roles/nginx/files/*cert.pem
 *.zip
 .git-hooks
 .vscode
+.env

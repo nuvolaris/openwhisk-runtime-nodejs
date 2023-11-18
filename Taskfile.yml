@@ -1,4 +1,17 @@
 version: '3'
 
+dotenv:
+  - .env
+
 tasks:
-   setup: {silent: true}
+  setup: {silent: true}
+
+  docker-login: >
+    echo $GITHUB_TOKEN | docker login ghcr.io -u $GITHUB_USER --password-stdin
+
+  push:
+    - task: docker-login
+    - ./gradlew core:nodejs18Action:distDocker
+    - docker tag action-nodejs-v18-svelte:latest ghcr.io/francescotimperi/action-nodejs-v18-svelte
+    - docker push ghcr.io/francescotimperi/action-nodejs-v18-svelte:latest
+

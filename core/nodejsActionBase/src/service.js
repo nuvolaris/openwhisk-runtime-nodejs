@@ -76,6 +76,7 @@ function NodeActionService(config) {
 
         // This is required as http server will auto disconnect in 2 minutes, this to not auto disconnect at all
         server.timeout = 0;
+        process.env["DEBUG"] = 'true';
     };
 
     /** Returns a promise of a response to the /init invocation.
@@ -173,6 +174,7 @@ function NodeActionService(config) {
 
         return initializeActionHandler(message)
             .then(handler => {
+                console.log(handler)
                 userCodeRunner = new NodeActionRunner(handler);
             })
             // emit error to activation log then flush the logs as this is the end of the activation
