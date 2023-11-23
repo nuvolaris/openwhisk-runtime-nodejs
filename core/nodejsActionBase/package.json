@@ -19,13 +19,15 @@
   },
   "dependencies": {
     "express": "4.17.3",
+    "langchain": "^0.0.197-rc.1",
     "minio": "^7.1.0",
-    "mongodb": "^4.8.1",
+    "mongodb": "^5.2.0",
+    "node-auth0": "^1.0.0",
+    "openai": "^4.5.0",
     "openwhisk": "3.21.7",
-    "redis": "4.0.4",
+    "pg": "^8.11.0",
+    "redis": "^4.6.4",
     "serialize-error": "9.1.0",
-    "uuid": "8.3.2",
-    "pg":"^8.11.0",
-    "openai": "^4.5.0"
+    "uuid": "8.3.2"
   }
 }
