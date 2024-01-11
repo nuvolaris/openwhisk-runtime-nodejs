@@ -18,12 +18,14 @@
     "request": "2.88.2"
   },
   "dependencies": {
+    "@langchain/community": "^0.0.16",
+    "@langchain/openai": "^0.0.11",
     "express": "4.17.3",
     "langchain": "^0.0.197-rc.1",
     "minio": "^7.1.0",
     "mongodb": "^5.2.0",
     "node-auth0": "^1.0.0",
-    "openai": "^4.5.0",
+    "openai": "^4.24.3",
     "openwhisk": "3.21.7",
     "pg": "^8.11.0",
     "redis": "^4.6.4",
